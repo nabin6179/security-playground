@@ -1,0 +1,162 @@
+{
+  "xss-ctf": {
+    "hash": "10c0eeab6351ed336afca4fea5d8af872bcf00d5093f2689e978352f0d113292",
+    "xp": 250
+  },
+  "sqli-ctf": {
+    "hash": "248f093f10ea2e6f0559ae3a3a846601f754c0593a6f481a56a16196f36a1c77",
+    "xp": 250
+  },
+  "bac-ctf": {
+    "hash": "101c5bdb646a37bb0fe36dc91b67585cf8390655605acd72d63c2f5afafe9549",
+    "xp": 300
+  },
+  "idor-ctf": {
+    "hash": "7fa450e9a4285613d5ce22af2ed3058d460c614f7f3cc4e7be5c03d315268afe",
+    "xp": 250
+  },
+  "csrf-ctf": {
+    "hash": "7e96a94713cfb9354e60408c5e1f42ec0e502a3140fffc939f725af27ebb8e55",
+    "xp": 250
+  },
+  "upload-ctf": {
+    "hash": "64496e7d22571dfa5d0bf73f5b29c7e4040965eccb74e41f75d2bf75a837ae8e",
+    "xp": 300
+  },
+  "traversal-ctf": {
+    "hash": "af3f606a05168e4f142147ede3bbd1677bc70e910bc8a30c5147df8714c08cac",
+    "xp": 250
+  },
+  "auth-ctf": {
+    "hash": "072335671698ed36be7b80eeaff1a233593e26812dd84851e29a20a61b735a4d",
+    "xp": 250
+  },
+  "ssrf-ctf": {
+    "hash": "84798d34275ae1199b3ecb00fc49efae09be2d8de53fa7c8ade8633465b36383",
+    "xp": 300
+  },
+  "misconfig-ctf": {
+    "hash": "812842fd65e94b3a75db41e3d51b10a83de589ffe97fa46b4fc9c96e20460483",
+    "xp": 300
+  },
+  "ctf-easy-1": {
+    "hash": "d5ed782056f317462712d010ec34dba78146ff169bcde1fe5a9b4bc8472f4235",
+    "xp": 150
+  },
+  "ctf-easy-2": {
+    "hash": "37c65630b5b74e619b8f8ad959d366d2401c72396868a3e6a22b94c24608aeda",
+    "xp": 150
+  },
+  "ctf-easy-3": {
+    "hash": "c69d7a17c8a6f5b50d2c3edf88217e77bbbffb666295598e58ab7e50012b6eec",
+    "xp": 150
+  },
+  "ctf-easy-4": {
+    "hash": "a74569a6aea8670b00f5f12255b6ba5126f417b42894849630ef7d2db6970c1a",
+    "xp": 150
+  },
+  "ctf-easy-5": {
+    "hash": "7909961f29af6f0757c025bb492254a6e0c7239fd92a077f7105c06cfb68950c",
+    "xp": 150
+  },
+  "ctf-easy-6": {
+    "hash": "a39eeaac52186d44de4dc3e234164c7fca1b675f45058d17d132747b099b6288",
+    "xp": 150
+  },
+  "ctf-easy-7": {
+    "hash": "5b6ec5d56d39a47e95006df38d3c83bda0041bf1162fe3841620e35ada9c033e",
+    "xp": 150
+  },
+  "ctf-easy-8": {
+    "hash": "96ebd142fb0ef680318b3041b9eb01da4b28dfbc6b0b9dc5966f9afb47e2405e",
+    "xp": 150
+  },
+  "ctf-easy-9": {
+    "hash": "c9a9c5fe31b1a0168e00d5f7a8c0abfa9c8c6ecc4c24040bb810c7c98b935805",
+    "xp": 150
+  },
+  "ctf-easy-10": {
+    "hash": "e536e301947ed76937033a417c23db12471221752872a84a5d1f38261e16bb8a",
+    "xp": 150
+  },
+  "ctf-medium-11": {
+    "hash": "9554014b044dc42b8720fc08564a737dde26e598cf1a480310a9aeed08fcdcc9",
+    "xp": 300
+  },
+  "ctf-medium-12": {
+    "hash": "b65a539c03802a67c21652c8f43342144cb963033a14a1b77d990d32a50aed4a",
+    "xp": 300
+  },
+  "ctf-medium-13": {
+    "hash": "4cad7f9e857642e4e5edc2413f6b391b3a61d66fd8b2b8e8f3b268e063227ce0",
+    "xp": 300
+  },
+  "ctf-medium-14": {
+    "hash": "cf71a5af4ea9f37a6f174e33e06c3692e9c600d9195bc5bf1d8c9b663ad6214a",
+    "xp": 300
+  },
+  "ctf-medium-15": {
+    "hash": "5c727d729654417a9d64d924bc3828013757374d3f29d917f41cae9a09392fa6",
+    "xp": 300
+  },
+  "ctf-medium-16": {
+    "hash": "a130c863223138c3e081820ac96ecd0d9266ae44eb802ec392754975765fb9d0",
+    "xp": 300
+  },
+  "ctf-medium-17": {
+    "hash": "de2b7c95dfd3d140f7b540cba7524c479e172e15be3c701d783e50d0eb359ab4",
+    "xp": 300
+  },
+  "ctf-medium-18": {
+    "hash": "ce81f0b3058c525c6054cde31a03d681cd7c10e97219015a2a680cd4157a4eeb",
+    "xp": 300
+  },
+  "ctf-medium-19": {
+    "hash": "d870c4e6b92d8555af1a02b1ab4d041ab8f4410d9b6c7cb6225729424d669fd6",
+    "xp": 300
+  },
+  "ctf-medium-20": {
+    "hash": "68ad62f213852932b5b6460106b318f4f1df1c3c1389c107549f181b728144d9",
+    "xp": 300
+  },
+  "ctf-hard-21": {
+    "hash": "c3f179db7c36f328ee8c449cdaa0cb25d06951578d9628c334b19c92d7befad0",
+    "xp": 500
+  },
+  "ctf-hard-22": {
+    "hash": "899316e3e540aceffc904e7b75922b40efab0bffe817b2860bc296263c2ead70",
+    "xp": 500
+  },
+  "ctf-hard-23": {
+    "hash": "18a4e95fe3ebc3ac81fea7300c9dd18df1d5c2d278c7ec5e89ca06ac20faf32c",
+    "xp": 500
+  },
+  "ctf-hard-24": {
+    "hash": "a3d62ef65bfe38dc47ccf6a58cd3626de6ba9186d8e387ec62b1080194e9a02f",
+    "xp": 500
+  },
+  "ctf-hard-25": {
+    "hash": "8e44521bf4bbeac06e92136d6ada78ca62773c70f21c10a0da8844468fba2762",
+    "xp": 500
+  },
+  "ctf-hard-26": {
+    "hash": "09e9efa170e5f735a40e5b7a5d7506deb9079e8f40dbcde5ab0222cbf01d5578",
+    "xp": 500
+  },
+  "ctf-hard-27": {
+    "hash": "4ebc0cbd11157923d29319ed47c8e328de0473a61672003e909dbff6ec4fc25f",
+    "xp": 500
+  },
+  "ctf-hard-28": {
+    "hash": "1b9e695f789eb870eabec1adaa1457a277698e962e3a921dc342117dc5f9303b",
+    "xp": 500
+  },
+  "ctf-hard-29": {
+    "hash": "fe7c5ed83ca3a9667d00cfd17e5d2ea710683c9493e63c8aca0e8ddb904ccb8c",
+    "xp": 500
+  },
+  "ctf-hard-30": {
+    "hash": "78b908befcac99b1d28a2ba5a6ebcd60adb0203a3b0def1c1d0b33d7c9fbe795",
+    "xp": 500
+  }
+}

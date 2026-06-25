@@ -1,0 +1,74 @@
+<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New',monospace">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E6EDF3"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background (transparent for dark mode) -->
+  <!-- Shield body -->
+  <g transform="translate(12,8)">
+    <!-- Outer shield -->
+    <path d="M48 4 L88 18 L88 52 C88 74 70 90 48 96 C26 90 8 74 8 52 L8 18 Z"
+          fill="url(#shieldGrad)" opacity="0.15" stroke="url(#shieldGrad)" stroke-width="1.5"/>
+    <!-- Shield circuit lines -->
+    <line x1="20" y1="35" x2="30" y2="35" stroke="#8B5CF6" stroke-width="0.8" opacity="0.5"/>
+    <line x1="30" y1="35" x2="30" y2="28" stroke="#8B5CF6" stroke-width="0.8" opacity="0.5"/>
+    <line x1="30" y1="28" x2="40" y2="28" stroke="#8B5CF6" stroke-width="0.8" opacity="0.5"/>
+    <line x1="76" y1="40" x2="66" y2="40" stroke="#22D3EE" stroke-width="0.8" opacity="0.5"/>
+    <line x1="66" y1="40" x2="66" y2="55" stroke="#22D3EE" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="20" cy="35" r="2" fill="#8B5CF6" opacity="0.6"/>
+    <circle cx="40" cy="28" r="2" fill="#8B5CF6" opacity="0.6"/>
+    <circle cx="76" cy="40" r="2" fill="#22D3EE" opacity="0.6"/>
+    <circle cx="66" cy="55" r="2" fill="#22D3EE" opacity="0.6"/>
+    <!-- Terminal prompt >_ centered in shield -->
+    <text x="48" y="58" text-anchor="middle" font-size="22" font-weight="bold"
+          fill="#22D3EE" filter="url(#glow)" font-family="'Courier New',monospace">&gt;_</text>
+    <!-- Small lock icon top-right of shield -->
+    <rect x="66" y="16" width="10" height="8" rx="1.5" fill="none" stroke="#8B5CF6" stroke-width="1.2" opacity="0.7"/>
+    <path d="M68 16 L68 13 C68 10.5 76 10.5 76 13 L76 16" fill="none" stroke="#8B5CF6" stroke-width="1.2" opacity="0.7"/>
+    <circle cx="71" cy="21" r="1.5" fill="#8B5CF6" opacity="0.7"/>
+    <!-- Bug icon bottom-left -->
+    <circle cx="22" cy="70" r="5" fill="none" stroke="#EF4444" stroke-width="1.2" opacity="0.6"/>
+    <line x1="22" y1="65" x2="22" y2="62" stroke="#EF4444" stroke-width="1" opacity="0.6"/>
+    <line x1="17" y1="68" x2="14" y2="66" stroke="#EF4444" stroke-width="1" opacity="0.6"/>
+    <line x1="17" y1="72" x2="14" y2="74" stroke="#EF4444" stroke-width="1" opacity="0.6"/>
+    <line x1="27" y1="68" x2="30" y2="66" stroke="#EF4444" stroke-width="1" opacity="0.6"/>
+    <line x1="27" y1="72" x2="30" y2="74" stroke="#EF4444" stroke-width="1" opacity="0.6"/>
+    <!-- Glow dot pulse -->
+    <circle cx="48" cy="24" r="3" fill="#10B981" opacity="0.8" filter="url(#glow)"/>
+    <circle cx="48" cy="24" r="5" fill="none" stroke="#10B981" stroke-width="0.8" opacity="0.4"/>
+  </g>
+
+  <!-- Logo Text -->
+  <text x="116" y="52" font-size="26" font-weight="900" fill="url(#textGrad)"
+        font-family="'Courier New',monospace" letter-spacing="-0.5">Security</text>
+  <text x="116" y="78" font-size="26" font-weight="900" fill="#8B5CF6"
+        font-family="'Courier New',monospace" letter-spacing="-0.5" filter="url(#softglow)">Playground</text>
+
+  <!-- Tagline -->
+  <text x="116" y="100" font-size="10.5" fill="#8B949E" font-family="'Courier New',monospace"
+        letter-spacing="0.08em">Learn. Practice. Exploit. Defend.</text>
+
+  <!-- Decorative line accent -->
+  <line x1="116" y1="88" x2="370" y2="88" stroke="url(#shieldGrad)" stroke-width="0.6" opacity="0.4"/>
+
+  <!-- Version tag -->
+  <rect x="330" y="42" width="48" height="16" rx="8" fill="rgba(139,92,246,0.15)"
+        stroke="rgba(139,92,246,0.4)" stroke-width="0.8"/>
+  <text x="354" y="53.5" text-anchor="middle" font-size="9" fill="#8B5CF6"
+        font-family="'Courier New',monospace" font-weight="700">v1.0</text>
+</svg>

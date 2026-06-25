@@ -1,0 +1,202 @@
+[
+  {
+    "id": "xss-ctf",
+    "flag": "SP{xss_cookie_stealer_1337}",
+    "xp": 250
+  },
+  {
+    "id": "sqli-ctf",
+    "flag": "SP{union_sqli_flag_99}",
+    "xp": 250
+  },
+  {
+    "id": "bac-ctf",
+    "flag": "SP{broken_access_control_admin_dash}",
+    "xp": 300
+  },
+  {
+    "id": "idor-ctf",
+    "flag": "SP{idor_flag_revealed_1001}",
+    "xp": 250
+  },
+  {
+    "id": "csrf-ctf",
+    "flag": "SP{csrf_admin_hijack_992}",
+    "xp": 250
+  },
+  {
+    "id": "upload-ctf",
+    "flag": "SP{webshell_rce_achieved}",
+    "xp": 300
+  },
+  {
+    "id": "traversal-ctf",
+    "flag": "SP{path_traversal_master_2026}",
+    "xp": 250
+  },
+  {
+    "id": "auth-ctf",
+    "flag": "SP{auth_bypass_brute_force_win}",
+    "xp": 250
+  },
+  {
+    "id": "ssrf-ctf",
+    "flag": "SP{ssrf_cloud_metadata_leak}",
+    "xp": 300
+  },
+  {
+    "id": "misconfig-ctf",
+    "flag": "SP{misconfig_git_leak_981}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-easy-1",
+    "flag": "SP{comments_are_not_secure}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-2",
+    "flag": "SP{cookie_monster_says_admin}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-3",
+    "flag": "SP{source_code_secrets}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-4",
+    "flag": "SP{robots_are_watching_you}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-5",
+    "flag": "SP{base64_decode_success}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-6",
+    "flag": "SP{hidden_headers_disclosed}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-7",
+    "flag": "SP{logic_checkout_freebie}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-8",
+    "flag": "SP{user_agent_spoofed}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-9",
+    "flag": "SP{fuzzing_ids_is_fun}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-easy-10",
+    "flag": "SP{logic_empty_auth_pass}",
+    "xp": 150
+  },
+  {
+    "id": "ctf-medium-11",
+    "flag": "SP{jwt_none_alg_bypass_2026}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-12",
+    "flag": "SP{api_idor_token_leak}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-13",
+    "flag": "SP{md5_hash_cracked_admin}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-14",
+    "flag": "SP{xml_external_entity_rce}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-15",
+    "flag": "SP{blind_sqli_numeric_win}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-16",
+    "flag": "SP{php_deserialization_win}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-17",
+    "flag": "SP{git_history_audit_reveal}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-18",
+    "flag": "SP{cors_origin_exploit_99}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-19",
+    "flag": "SP{rate_limit_header_bypass}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-medium-20",
+    "flag": "SP{xor_cipher_cracked}",
+    "xp": 300
+  },
+  {
+    "id": "ctf-hard-21",
+    "flag": "SP{jwt_secret_key_compromised}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-22",
+    "flag": "SP{ssti_template_rce_access}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-23",
+    "flag": "SP{prototype_polluted_access}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-24",
+    "flag": "SP{sqli_into_outfile_rce}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-25",
+    "flag": "SP{dns_rebinding_ssrf_bypass}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-26",
+    "flag": "SP{open_redirect_ssrf_escalate}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-27",
+    "flag": "SP{race_condition_wallet_drain}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-28",
+    "flag": "SP{host_header_poisoning_token}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-29",
+    "flag": "SP{php_type_juggling_magic}",
+    "xp": 500
+  },
+  {
+    "id": "ctf-hard-30",
+    "flag": "SP{graphql_introspection_leaks}",
+    "xp": 500
+  }
+]

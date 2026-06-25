@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Playground - Learn, Practice, Exploit, Defend</title>
+    <meta name="description" content="An interactive, beginner-friendly cybersecurity platform. Learn web vulnerabilities, practice in realistic sandboxed labs, and play CTF challenges.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicon (Inline SVG Data URI) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238B5CF6' d='M12 2S3 6 3 12c0 5.25 4.5 9.75 9 10 4.5-.25 9-4.75 9-10 0-6-9-10-9-10zm0 3c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm-1 8h2v2h-2zm0-6h2v4h-2z'/%3E%3C/svg%3E">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-wrapper">
+                    <!-- Dynamic Glowing SVG Logo -->
+                    <svg class="logo-svg" width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Neon Glow Filters -->
+                        <filter id="glow-purple" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="2.5" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                        
+                        <!-- Shield Outline with purple-to-blue gradient -->
+                        <path class="logo-shield" d="M50 8C25 18 25 45 25 60C25 78 40 90 50 92C60 90 75 78 75 60C75 45 75 18 50 8Z" stroke="url(#logo-grad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-purple)"/>
+                        
+                        <!-- Open Lock Symbol (Symbolizing cracked/open security targets) -->
+                        <!-- Shackle (Open) -->
+                        <path d="M40 33V26C40 20.5 44.5 16 50 16C55.5 16 60 20.5 60 26" stroke="#3B82F6" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Lock Body -->
+                        <rect x="34" y="33" width="32" height="20" rx="3" fill="#1e1b4b" stroke="#8B5CF6" stroke-width="3"/>
+                        <!-- Keyhole -->
+                        <path d="M50 39C48.5 39 47 40.5 47 42C47 43.5 48.5 44 49 46.5V49.5H51V46.5C51.5 44 53 43.5 53 42C53 40.5 51.5 39 50 39Z" fill="#3B82F6"/>
+
+                        <!-- Terminal Prompt (>_) in the bottom area -->
+                        <path class="logo-prompt" d="M38 64L43 68L38 72" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line class="logo-cursor" x1="46" y1="72" x2="52" y2="72" stroke="#10B981" stroke-width="3.5" stroke-linecap="round"/>
+
+                        <!-- Circuit Traces branching outwards from lock to shield borders -->
+                        <path d="M34 43H28L26 45M66 43H72L74 45" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
+                        <circle cx="26" cy="45" r="2.2" fill="#a78bfa"/>
+                        <circle cx="74" cy="45" r="2.2" fill="#a78bfa"/>
+
+                        <path d="M36 53H30L27 56" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
+                        <circle cx="27" cy="56" r="2.2" fill="#a78bfa"/>
+
+                        <path d="M64 53H70L73 56" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
+                        <circle cx="73" cy="56" r="2.2" fill="#a78bfa"/>
+
+                        <defs>
+                            <linearGradient id="logo-grad" x1="25" y1="8" x2="75" y2="92" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#8B5CF6" />
+                                <stop offset="50%" stop-color="#3B82F6" />
+                                <stop offset="100%" stop-color="#10B981" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="logo-text-area">
+                        <span class="logo-title">Security <span class="accent-text">Playground</span></span>
+                        <span class="logo-tagline">Learn. Practice. Exploit. Defend.</span>
+                    </div>
+                </div>
+                <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close navigation">&times;</button>
+            </div>
+
+            <!-- Search Area -->
+            <div class="sidebar-search">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="vulnSearch" placeholder="Search vulnerabilities, CTFs..." aria-label="Search">
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <button class="nav-btn active" data-target="dashboard" id="nav-dashboard">
+                            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                            Dashboard
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="learn" id="nav-learn">
+                            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            Learn & Labs
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="ctf" id="nav-ctf">
+                            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                            CTF Arena
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="progress" id="nav-progress">
+                            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                            Progress & Badges
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="about" id="nav-about">
+                            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            About Playground
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- User Profile Widget (Sidebar Bottom) -->
+            <div class="user-profile-widget">
+                <div class="profile-avatar-area">
+                    <div class="avatar-glow"></div>
+                    <div class="profile-avatar" id="avatarImage">⚡</div>
+                    <div class="profile-meta">
+                        <div class="profile-name-row">
+                            <span class="profile-username" id="usernameDisplay">Recruit</span>
+                            <button class="edit-name-btn" id="editNameBtn" title="Edit Username">✏️</button>
+                        </div>
+                        <span class="profile-rank" id="rankDisplay">Beginner</span>
+                    </div>
+                </div>
+                <div class="profile-xp-progress">
+                    <div class="xp-numbers">
+                        <span>Lvl <span id="userLevel">1</span></span>
+                        <span><span id="userXp">0</span> / <span id="nextLevelXp">1000</span> XP</span>
+                    </div>
+                    <div class="xp-bar-outer">
+                        <div class="xp-bar-inner" id="xpBarFill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header (Mobile menu trigger & quick stats) -->
+            <header class="top-header">
+                <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <h1 class="page-title" id="pageTitle">Dashboard</h1>
+
+                <div class="header-actions">
+                    <!-- Stats Badge Row -->
+                    <div class="stats-badge" title="Total XP Earned">
+                        <span class="badge-icon purple-text">✨</span>
+                        <span class="badge-value" id="headerXp">0 XP</span>
+                    </div>
+                    <div class="stats-badge" title="Labs Completed">
+                        <span class="badge-icon blue-text">🔬</span>
+                        <span class="badge-value" id="headerLabs">0/30 Labs</span>
+                    </div>
+                    <div class="stats-badge" title="CTFs Solved">
+                        <span class="badge-icon green-text">🏁</span>
+                        <span class="badge-value" id="headerCtfs">0/30 CTF</span>
+                    </div>
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggleBtn" title="Toggle Light/Dark Theme">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dynamic Content Window -->
+            <div class="content-body" id="contentBody">
+                
+                <!-- DASHBOARD PAGE -->
+                <section id="view-dashboard" class="content-view active">
+                    <!-- Hero Widget -->
+                    <div class="hero-banner">
+                        <div class="hero-glow"></div>
+                        <div class="hero-content">
+                            <span class="hero-tag">V1.0 LIVE</span>
+                            <h2 class="hero-heading">Welcome to the Cybersecurity Arena</h2>
+                            <p class="hero-subtext">Learn core web vulnerabilities, exploit interactive sandbox environments, and practice defensive strategies in the modern hacker simulation.</p>
+                            <div class="hero-ctas">
+                                <button class="btn btn-primary" onclick="switchTab('learn')">Start Learning</button>
+                                <button class="btn btn-secondary" onclick="switchTab('learn'); setTimeout(() => selectVulnerability(0), 100);">Explore Labs</button>
+                                <button class="btn btn-accent" onclick="switchTab('ctf')">Play CTF Challenges</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics grid -->
+                    <div class="stats-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon purple-bg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+                            <div class="metric-data">
+                                <span class="metric-label">XP Level</span>
+                                <h3 class="metric-value" id="dashLevel">Level 1</h3>
+                                <span class="metric-sub" id="dashRank">Beginner Rank</span>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon blue-bg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+                            <div class="metric-data">
+                                <span class="metric-label">Labs Mastered</span>
+                                <h3 class="metric-value" id="dashLabsCount">0 / 30</h3>
+                                <span class="metric-sub" id="dashLabsProgress">0% Completed</span>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon green-bg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></div>
+                            <div class="metric-data">
+                                <span class="metric-label">CTF Flags Found</span>
+                                <h3 class="metric-value" id="dashCtfCount">0 / 30</h3>
+                                <span class="metric-sub" id="dashCtfProgress">0% Solved</span>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon red-bg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg></div>
+                            <div class="metric-data">
+                                <span class="metric-label">Recent Badges</span>
+                                <h3 class="metric-value" id="dashBadgeCount">0 Badges</h3>
+                                <span class="metric-sub" id="dashLastBadge">None unlocked yet</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Roadmap and Badges Row -->
+                    <div class="dashboard-split-row">
+                        <!-- Learning Roadmap -->
+                        <div class="panel roadmap-panel">
+                            <h3 class="panel-title">🛡️ Cybersecurity Learning Path</h3>
+                            <p class="panel-subtitle">Progress through the vulnerability tree sequentially to build a solid foundations.</p>
+                            <div class="roadmap-tree" id="roadmapTree">
+                                <!-- Loaded via script -->
+                            </div>
+                        </div>
+
+                        <!-- Achievements panel -->
+                        <div class="panel achievements-panel">
+                            <div class="panel-header-row">
+                                <h3 class="panel-title">🏆 Recent Achievements</h3>
+                                <button class="text-link-btn" onclick="switchTab('progress')">View All</button>
+                            </div>
+                            <div class="achievements-preview-grid" id="dashboardAchievements">
+                                <!-- Loaded via script -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- LEARN & LABS PAGE -->
+                <section id="view-learn" class="content-view">
+                    <div class="learn-view-layout">
+                        <!-- Left sub-sidebar (List of 10 vulnerabilities) -->
+                        <div class="vuln-picker-sidebar">
+                            <h3 class="section-subtitle">Vulnerability Catalog</h3>
+                            <ul class="vuln-list-menu" id="vulnListMenu">
+                                <!-- Loaded via script -->
+                            </ul>
+                        </div>
+
+                        <!-- Right display area -->
+                        <div class="vuln-detail-container" id="vulnDetailContainer">
+                            <!-- Selected Vulnerability Content -->
+                            <div class="vuln-detail-header">
+                                <div class="vuln-meta-title">
+                                    <span class="vuln-index-badge" id="vulnIndex">01</span>
+                                    <div>
+                                        <h2 class="vuln-title" id="vulnTitle">Cross-Site Scripting</h2>
+                                        <span class="vuln-category-badge" id="vulnCategory">Injection</span>
+                                    </div>
+                                </div>
+                                <div class="vuln-nav-tabs">
+                                    <button class="vuln-tab active" data-tab="learn-theory">Theory (Learn)</button>
+                                    <button class="vuln-tab" data-tab="learn-practice">Practice (Labs)</button>
+                                    <button class="vuln-tab" data-tab="learn-ctf-tab">Challenge (CTF)</button>
+                                </div>
+                            </div>
+
+                            <div class="vuln-tab-contents">
+                                <!-- Theory Section -->
+                                <div id="tab-learn-theory" class="vuln-tab-content active">
+
+                                    <!-- Animated Attack Flow: visual-first explanation -->
+                                    <div class="attack-animation-section">
+                                        <div class="anim-header">
+                                            <h4>🎬 See It Happen</h4>
+                                            <div class="anim-mode-toggle">
+                                                <button class="anim-mode-btn active" data-mode="breach" id="animModeBreachBtn">⚠️ Vulnerable System</button>
+                                                <button class="anim-mode-btn" data-mode="defended" id="animModeDefendedBtn">✅ Secure System</button>
+                                            </div>
+                                        </div>
+                                        <div class="anim-stage">
+                                            <div class="anim-track" id="animTrack">
+                                                <div class="anim-actor" id="animActorA">
+                                                    <div class="anim-actor-icon" id="animIconA">🧑‍💻</div>
+                                                    <div class="anim-actor-label" id="animLabelA">Attacker</div>
+                                                </div>
+                                                <div class="anim-actor" id="animActorB">
+                                                    <div class="anim-actor-icon" id="animIconB">🌐</div>
+                                                    <div class="anim-actor-label" id="animLabelB">Browser</div>
+                                                </div>
+                                                <div class="anim-actor" id="animActorC">
+                                                    <div class="anim-actor-icon" id="animIconC">🖥️</div>
+                                                    <div class="anim-actor-label" id="animLabelC">Server</div>
+                                                </div>
+                                                <div class="anim-actor" id="animActorD">
+                                                    <div class="anim-actor-icon" id="animIconD">🗄️</div>
+                                                    <div class="anim-actor-label" id="animLabelD">Database</div>
+                                                </div>
+                                                <div class="anim-packet" id="animPacket">📦</div>
+                                            </div>
+                                            <div class="anim-caption" id="animCaption">Press Play to watch this attack happen, step by step.</div>
+                                            <div class="anim-outcome" id="animOutcome" style="display:none;"></div>
+                                        </div>
+                                        <div class="anim-controls">
+                                            <button class="btn btn-secondary btn-sm" id="animReplayBtn">⏮ Replay</button>
+                                            <button class="btn btn-primary btn-sm" id="animPlayBtn">▶ Play</button>
+                                            <button class="btn btn-secondary btn-sm" id="animNextBtn">⏭ Step</button>
+                                            <span class="anim-step-indicator" id="animStepIndicator">Step 0 / 0</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="theory-grid">
+                                        <div class="theory-main">
+                                            <div class="theory-block">
+                                                <h4>What is it?</h4>
+                                                <p id="theoryWhat">Vulnerability explanation...</p>
+                                            </div>
+                                            <div class="theory-block">
+                                                <h4>How does it work?</h4>
+                                                <p id="theoryHow">Mechanisms...</p>
+                                            </div>
+                                            <div class="theory-block">
+                                                <h4>Real-World Impact</h4>
+                                                <div class="impact-level-tag" id="theoryImpactLevel">High</div>
+                                                <p id="theoryImpact">Impact details...</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="theory-side">
+                                            <div class="theory-block bg-dim">
+                                                <h4>How to Prevent It</h4>
+                                                <ul class="prevention-list" id="theoryPrevention">
+                                                    <!-- Loaded via script -->
+                                                </ul>
+                                            </div>
+                                            <div class="theory-block bg-dim">
+                                                <h4>Real-world Example</h4>
+                                                <blockquote class="code-quote" id="theoryExample">
+                                                    Example description...
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Interactive Code Comparison Widget -->
+                                    <div class="code-comparison-widget">
+                                        <div class="widget-header">
+                                            <h4>Code Sandbox: Vulnerable vs Secure</h4>
+                                            <div class="comparison-tabs">
+                                                <button class="comp-tab active" data-comp="vulnerable">Vulnerable Code</button>
+                                                <button class="comp-tab" data-comp="secure">Secure Code (Defended)</button>
+                                            </div>
+                                        </div>
+                                        <div class="code-editor-sim">
+                                            <div class="editor-header">
+                                                <span class="dot red"></span>
+                                                <span class="dot yellow"></span>
+                                                <span class="dot green"></span>
+                                                <span class="editor-filename" id="comparisonFilename">server.js</span>
+                                            </div>
+                                            <pre class="editor-code"><code id="comparisonCode">// Code block</code></pre>
+                                            <div class="code-explainer-alert" id="comparisonExplainer">
+                                                Explain what makes this code block vulnerable/secure.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Practice (Labs) Section -->
+                                <div id="tab-learn-practice" class="vuln-tab-content">
+                                    <div class="practice-header-row">
+                                        <p class="section-desc">Solve these interactive web simulations. Bypassing validation rules, exploiting errors, and capturing inputs unlocks achievements.</p>
+                                    </div>
+                                    <div class="labs-grid" id="labsGrid">
+                                        <!-- Basic, Intermediate, Advanced Lab Cards loaded via script -->
+                                    </div>
+                                </div>
+
+                                <!-- CTF Section -->
+                                <div id="tab-learn-ctf-tab" class="vuln-tab-content">
+                                    <div class="ctf-tab-card">
+                                        <div class="ctf-card-header">
+                                            <div class="badge-flag green-bg">MINI-CHALLENGE</div>
+                                            <h3 id="miniCtfTitle">Capture the Cookie</h3>
+                                            <div class="difficulty-rating">
+                                                <span class="difficulty-label">Difficulty:</span>
+                                                <span class="diff-indicator" id="miniCtfDifficulty">Easy</span>
+                                            </div>
+                                        </div>
+                                        <p class="ctf-card-desc" id="miniCtfDesc">Challenge description...</p>
+                                        <div class="ctf-card-actions">
+                                            <button class="btn btn-primary" id="miniCtfLaunchBtn">Launch Lab Environment</button>
+                                            <div class="flag-submit-wrapper">
+                                                <input type="text" class="flag-input" id="miniCtfInput" placeholder="SP{flag_here}" aria-label="Flag Input">
+                                                <button class="btn btn-accent" id="miniCtfSubmitBtn">Submit Flag</button>
+                                                <button class="btn btn-secondary" id="miniCtfRetryBtn" style="display:none;">🔄 Retry Challenge</button>
+                                            </div>
+                                        </div>
+                                        <div class="flag-feedback" id="miniCtfFeedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CTF ARENA PAGE -->
+                <section id="view-ctf" class="content-view">
+                    <div class="ctf-arena-header">
+                        <p class="section-desc">Capture the Flags (CTFs) are puzzle-based security challenges. Extract hidden strings of the form <code>SP{flag}</code> from mock sites, code reviews, and token engines.</p>
+                        <!-- Filter Tabs -->
+                        <div class="ctf-filters">
+                            <button class="filter-tab active" data-filter="all">All Challenges</button>
+                            <button class="filter-tab" data-filter="easy">Easy</button>
+                            <button class="filter-tab" data-filter="medium">Medium</button>
+                            <button class="filter-tab" data-filter="hard">Hard</button>
+                        </div>
+                    </div>
+
+                    <!-- Challenges Grid -->
+                    <div class="ctf-grid" id="ctfGrid">
+                        <!-- 30 Challenges loaded dynamically -->
+                    </div>
+                </section>
+
+                <!-- PROGRESS & STATS PAGE -->
+                <section id="view-progress" class="content-view">
+                    <div class="progress-details-grid">
+                        <!-- Profile Card -->
+                        <div class="panel progress-profile-card">
+                            <div class="progress-avatar-large">⚡</div>
+                            <h3 id="progressUsername">Recruit Hacker</h3>
+                            <div class="badge-tag rank-tag" id="progressRank">Beginner</div>
+                            <div class="level-indicator">Level <span id="progressLevel">1</span></div>
+                            
+                            <div class="xp-stat-box">
+                                <div class="stat-num" id="progressXpCount">0</div>
+                                <div class="stat-lbl">Total XP Earned</div>
+                            </div>
+
+                            <div class="xp-bar-outer-large">
+                                <div class="xp-bar-inner-large" id="progressXpBarFill" style="width: 0%"></div>
+                            </div>
+                            <div class="xp-remaining-text" id="progressXpNext">1000 XP to Level 2</div>
+                        </div>
+
+                        <!-- Skill tree matrix -->
+                        <div class="panel skill-matrix-card">
+                            <h3 class="panel-title">🛡️ Security Skill Specializations</h3>
+                            <p class="panel-subtitle">Performance breakdown by vulnerability domain.</p>
+                            <div class="skills-list" id="skillsList">
+                                <!-- Dynamically computed progress bars -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements list -->
+                    <div class="panel badges-section">
+                        <h3 class="panel-title">🏆 Achievement Badges (<span id="unlockedBadgesCount">0</span> / 12)</h3>
+                        <p class="panel-subtitle">Complete labs, submit flags, and try advanced exploits to unlock status honors.</p>
+                        <div class="badges-grid" id="badgesGrid">
+                            <!-- 12 Achievement cards generated by JavaScript -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ABOUT PLAYGROUND PAGE -->
+                <section id="view-about" class="content-view">
+                    <div class="about-grid">
+                        <div class="panel about-main">
+                            <h2 class="section-title">About Security Playground</h2>
+                            <p class="about-text">
+                                <strong>Security Playground</strong> is a modern, lightweight, fully sandboxed web application designed to introduce software developers, IT professionals, and security enthusiasts to web security. 
+                            </p>
+                            <p class="about-text">
+                                Inspired by industrial platforms like PortSwigger Web Security Academy and Damn Vulnerable Web Application (DVWA), this playground solves a common training challenge: introducing security topics <em>without</em> complex virtualization setups, backend installations, or network configurations.
+                            </p>
+                            <div class="alert-box warning-alert">
+                                <strong>⚠️ Ethical Hacking Disclaimer:</strong><br>
+                                The skills and techniques taught on this platform are for educational and authorized penetration testing purposes only. Targeting live production environments without written authorization is illegal. Respect privacy and practice ethical hacking at all times.
+                            </div>
+                            <h3>Key Architectures</h3>
+                            <ul class="about-features-list">
+                                <li><strong>30 Interactive Labs:</strong> Fully simulated browser sandboxes with reflected inputs, cookie editors, directory scanners, and server responses in JavaScript.</li>
+                                <li><strong>30 CTF Challenges:</strong> A dedicated Capture the Flag section containing source code audits, JWT token bypass, base64 ciphers, and logical errors.</li>
+                                <li><strong>Client-Side Engine:</strong> The entire database, state engine, and sandbox environments run in vanilla client-side files, securing privacy and offline utility.</li>
+                            </ul>
+                        </div>
+
+                        <div class="panel about-sidebar-panel">
+                            <h3>Developer & Support</h3>
+                            <div class="dev-author-card">
+                                <div class="author-avatar">💻</div>
+                                <div>
+                                    <strong>Lead Architect</strong>
+                                    <p>Nabin Tiwari</p>
+                                </div>
+                            </div>
+                            <hr class="divider">
+                            <h4>Tool Integrations Used</h4>
+                            <div class="tool-tags-grid">
+                                <span class="tag-badge">HTML5</span>
+                                <span class="tag-badge">CSS3</span>
+                                <span class="tag-badge">ES6 JavaScript</span>
+                                <span class="tag-badge">SVG Graphics</span>
+                                <span class="tag-badge">Local Storage API</span>
+                            </div>
+                            <hr class="divider">
+                            <h4>Version Info</h4>
+                            <table class="version-table">
+                                <tr>
+                                    <td>Core Version</td>
+                                    <td>1.0.0 Stable</td>
+                                </tr>
+                                <tr>
+                                    <td>Engine Type</td>
+                                    <td>SPA Client-Side</td>
+                                </tr>
+                                <tr>
+                                    <td>Release Date</td>
+                                    <td>June 2026</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MAIN SANDBOX WORKSPACE MODAL (Fullscreen Overlay) -->
+    <div class="sandbox-overlay" id="sandboxOverlay">
+        <div class="sandbox-window">
+            
+            <!-- Sandbox Header -->
+            <div class="sandbox-header">
+                <div class="sandbox-title-area">
+                    <span class="sandbox-env-tag">SANDBOX ENVIRONMENT</span>
+                    <h3 class="sandbox-title-text" id="sandboxTitle">Lab: Reflected XSS</h3>
+                </div>
+                <div class="sandbox-header-actions">
+                    <span class="sandbox-status-badge" id="sandboxStatus">UNSOLVED</span>
+                    <button class="btn btn-secondary btn-sm" id="sandboxResetBtn">Reset Env</button>
+                    <button class="sandbox-close-btn" id="sandboxCloseBtn">&times;</button>
+                </div>
+            </div>
+
+            <!-- Sandbox Main Split Workspace -->
+            <div class="sandbox-body">
+                
+                <!-- Left Details/Instructions Panel -->
+                <div class="sandbox-left-panel">
+                    <div class="sandbox-panel-section">
+                        <h4>🎯 Objective</h4>
+                        <p id="sandboxObjective">Find a way to alert the user name in the cookies.</p>
+                    </div>
+
+                    <div class="sandbox-panel-section">
+                        <h4>📖 Scenario Context</h4>
+                        <p id="sandboxScenario" class="dimmed-text">This web page displays search terms. The developer forgot to escape user inputs...</p>
+                    </div>
+
+                    <!-- Real Lab banner: shown only for challenges that have a genuine
+                         backend-hosted vulnerable app, instead of the simulated sandbox -->
+                    <div class="sandbox-panel-section real-lab-banner" id="sandboxRealLabBanner" style="display:none;">
+                        <h4>🧪 Real Vulnerable App</h4>
+                        <p>This one isn't simulated — it's a real, deliberately vulnerable backend app running on this server. Open it in a new tab and actually exploit it to get the flag.</p>
+                        <a id="sandboxRealLabLink" class="btn btn-accent" href="#" target="_blank" rel="noopener">🚀 Launch Real Lab</a>
+                    </div>
+
+                    <!-- Hint Accordion -->
+                    <div class="sandbox-panel-section hints-section">
+                        <button class="hint-accordion-header" id="hintToggleBtn">
+                            <span>💡 Hints & Solutions</span>
+                            <span class="accordion-arrow">▼</span>
+                        </button>
+                        <div class="hint-accordion-body" id="hintBody">
+                            <div class="hint-step">
+                                <strong>Hint 1:</strong>
+                                <p id="sandboxHint1">Try normal characters, see where it is printed.</p>
+                            </div>
+                            <div class="hint-step">
+                                <strong>Hint 2:</strong>
+                                <p id="sandboxHint2">Try inserting simple HTML elements like &lt;u&gt;.</p>
+                            </div>
+                            <div class="hint-step solution-step">
+                                <strong>Solution:</strong>
+                                <p id="sandboxSolution">Payload: <code>&lt;script&gt;alert(1)&lt;/script&gt;</code></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sandbox Challenge submission (only for CTFs, hidden for labs) -->
+                    <div class="sandbox-panel-section ctf-submission-box" id="sandboxCtfSubmission">
+                        <h4>🏁 Submit Flag</h4>
+                        <div class="flag-submit-wrapper">
+                            <input type="text" class="flag-input" id="sandboxCtfInput" placeholder="SP{flag_here}">
+                            <button class="btn btn-accent" id="sandboxCtfSubmitBtn">Submit</button>
+                            <button class="btn btn-secondary" id="sandboxCtfRetryBtn" style="display:none;">🔄 Retry Challenge</button>
+                        </div>
+                        <div class="flag-feedback" id="sandboxCtfFeedback"></div>
+                    </div>
+                </div>
+
+                <!-- Right Simulated Browser & DevTools Panel -->
+                <div class="sandbox-right-panel">
+                    
+                    <!-- Simulated Web Browser URL Bar -->
+                    <div class="sim-browser-bar">
+                        <div class="browser-nav-buttons">
+                            <button class="nav-arrow" id="browserBackBtn" disabled>&larr;</button>
+                            <button class="nav-arrow" id="browserForwardBtn" disabled>&rarr;</button>
+                            <button class="nav-arrow" id="browserReloadBtn">&#8635;</button>
+                        </div>
+                        <div class="browser-address-bar">
+                            <span class="lock-indicator">🔒</span>
+                            <input type="text" class="browser-url-input" id="browserUrlBar" value="http://vulnerable-site.local/">
+                        </div>
+                    </div>
+
+                    <!-- Interactive Browser Frame Viewport -->
+                    <div class="sim-browser-viewport" id="browserViewport">
+                        <!-- Inside this box is dynamic HTML generated by script.js -->
+                    </div>
+
+                    <!-- Simulated Developer Tools Panel (Expandable) -->
+                    <div class="sim-devtools-panel">
+                        <div class="devtools-header">
+                            <div class="devtools-tabs">
+                                <button class="devtools-tab active" data-devtab="dev-console">Console</button>
+                                <button class="devtools-tab" data-devtab="dev-cookies">Cookies</button>
+                                <button class="devtools-tab" data-devtab="dev-headers">Proxy Logs</button>
+                            </div>
+                            <span class="devtools-title">DEVELOPER TOOLS</span>
+                        </div>
+                        <div class="devtools-body">
+                            <!-- Console Tab -->
+                            <div class="devtools-tab-content active" id="dev-console">
+                                <div class="console-output" id="consoleOutputArea">
+                                    <div class="console-line system-line">[System] Developer tools console initialized. Ready.</div>
+                                </div>
+                            </div>
+                            <!-- Cookies Tab -->
+                            <div class="devtools-tab-content" id="dev-cookies">
+                                <table class="cookies-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Value</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cookiesTableBody">
+                                        <!-- Editable cookies loaded dynamically -->
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-secondary btn-sm" style="margin-top: 10px;" id="addCookieBtn">+ Add Cookie</button>
+                            </div>
+                            <!-- HTTP Headers / Interceptor Tab -->
+                            <div class="devtools-tab-content" id="dev-headers">
+                                <div class="proxy-editor-section">
+                                    <h5 class="devtools-subtitle">✏️ Outgoing Request Headers (editable — these are what actually get sent)</h5>
+                                    <table class="cookies-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Header</th>
+                                                <th>Value</th>
+                                                <th>Options</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="proxyHeadersTableBody">
+                                            <!-- Editable headers loaded dynamically -->
+                                        </tbody>
+                                    </table>
+                                    <button class="btn btn-secondary btn-sm" style="margin-top: 10px;" id="addProxyHeaderBtn">+ Add Header</button>
+                                </div>
+                                <div class="proxy-editor-section">
+                                    <h5 class="devtools-subtitle">✏️ Outgoing Request Body (editable)</h5>
+                                    <textarea id="proxyBodyEditor" class="proxy-body-editor" placeholder="e.g. user=admin&amp;pass=secret" rows="2"></textarea>
+                                </div>
+                                <h5 class="devtools-subtitle">📜 Captured Traffic Log</h5>
+                                <div class="console-output" id="proxyLogsArea">
+                                    <div class="console-line system-line">[Proxy] HTTP requests interceptor listening...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="modal-card">
+            <h3>Update Profile Card</h3>
+            <div class="form-group">
+                <label for="editUsernameInput">Username</label>
+                <input type="text" id="editUsernameInput" placeholder="Enter hacking name">
+            </div>
+            <div class="form-group">
+                <label>Select Avatar</label>
+                <div class="avatar-select-grid" id="avatarSelectGrid">
+                    <span class="avatar-option">⚡</span>
+                    <span class="avatar-option">💻</span>
+                    <span class="avatar-option">🕵️</span>
+                    <span class="avatar-option">⚙️</span>
+                    <span class="avatar-option">🧬</span>
+                    <span class="avatar-option">👽</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="closeProfileModalBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert / Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- App Script -->
+    <script src="attackFlows.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
